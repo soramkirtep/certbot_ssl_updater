@@ -13,6 +13,8 @@ Open ports 80, 443
 - install pip "python %JBOSS_HOME%\..\scripts\certbot_ssl_updater\materials\get-pip.py"
 - install "pip install -r %JBOSS_HOME%\..\scripts\certbot_ssl_updater\requirements.txt"
 - edit main.conf
+- install Scheduled task:
+SchTasks /Create /RU [your_user] /RP [your_password] /SC DAILY /TN "certbot_ssl_updater" /TR "%JBOSS_HOME%\..\scripts\certbot_ssl_updater\run.bat %JBOSS_HOME%\..\scripts\certbot_ssl_updater\ python" /ST 01:20 /RL HIGHEST /F
 - runs certbot_ssl_updater\run.bat
 
 """
