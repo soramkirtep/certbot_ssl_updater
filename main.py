@@ -11,7 +11,7 @@ Open ports 80, 443
 
 - install (in this order) python, add path to python in env var, openssl, certbot 
 - install pip "python %JBOSS_HOME%\..\scripts\certbot_ssl_updater\materials\get-pip.py"
-- install "pip install -r %JBOSS_HOME%\..\scripts\certbot_ssl_updater\requrements.txt"
+- install "pip install -r %JBOSS_HOME%\..\scripts\certbot_ssl_updater\requirements.txt"
 - edit main.conf
 - runs certbot_ssl_updater\run.bat
 
