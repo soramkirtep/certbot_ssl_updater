@@ -44,7 +44,7 @@ HTTP = conf.get("server", "port_http")
 HTTPS = conf.get("server", "port_https")
 PASS = conf.get("server", "pass")
 CERTBOT_PATH = conf.get("server", "certbot_path")
-
+OPENSSL_PATH = conf.get("server", "openssl_path")
 
 DOMAIN = conf.get("domain", "host")
 # CERTBOT: Change second param between certbot_certonly and certbot_certonly_test
@@ -131,12 +131,12 @@ def certbot_renew_cert(certbot_renew):
         None
 
 
-def openssl_create_pkcs12(certbot, domain, password):
+def openssl_create_pkcs12(certbot, domain, password, openssl):
     """
     Openssl creates pkcs12 file from ~\Certbot\~\some_domain.pem files in ~\Certbot\~\live directory.
     """
     try:
-        openssl_command = f"openssl pkcs12 -export -out {certbot}{domain}_fullchain_and_key.p12 -in {certbot}live\\{domain}\\fullchain.pem -inkey {certbot}live\\{domain}\\privkey.pem -name tomcat -passout pass:{password}"
+        openssl_command = f"{openssl}openssl pkcs12 -export -out {certbot}{domain}_fullchain_and_key.p12 -in {certbot}live\\{domain}\\fullchain.pem -inkey {certbot}live\\{domain}\\privkey.pem -name tomcat -passout pass:{password}"
         result = subprocess.call(openssl_command, shell=True)
         if result == 1:
             print('Problem to create .p12')
@@ -178,7 +178,7 @@ def change_cert_format():
     try:
         logging.info("Remaking certifikate from .pem through pkcs12 to .jks")
         # 5. Create .p12 certificate
-        openssl_create_pkcs12(CERTBOT_PATH, DOMAIN, PASS)
+        openssl_create_pkcs12(CERTBOT_PATH, DOMAIN, PASS, OPENSSL_PATH)
         # 6. check if keystore already exists and delete it 
         delete_keystore_if_exists(CERTBOT_PATH, KEYSTORE)
         # 7. create kyestore.jks

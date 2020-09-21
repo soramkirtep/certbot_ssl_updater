@@ -1,6 +1,6 @@
 REM install (in this order) python, add path to python in env var, openssl, certbot
 REM install pip "python %JBOSS_HOME%\..\scripts\certbot_ssl_updater\materials\get-pip.py"
-REM install "pip install -r %JBOSS_HOME%\..\scripts\certbot_ssl_updater\requrements.txt"
+REM install "pip install -r %JBOSS_HOME%\..\scripts\certbot_ssl_updater\requirements.txt"
 REM edit main.conf
 REM runs certbot_ssl_updater\run.bat
 echo off
